@@ -4,9 +4,11 @@ const express = require("express");
 const workoutRoutes= require("./workouts");
 // const = require("");
 
-const appRouter = express.Router();
+const router = express.Router();
 
 //ex todos.js route
-appRouter.use("/workouts", workoutRoutes);
+router.use("/workouts", workoutRoutes);
 //ex posts.js route
-// appRouter.use("/", );
+// router.use("/", );'
+
+module.exports = router;

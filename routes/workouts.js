@@ -1,16 +1,16 @@
 // projects 2 router  review it
 
 const express = require("express");
+
 const db = require("../models");
 
 //require in index.js router
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/workouts", async (req, res) => {
     try {
         const workouts = await db.Workout.find({});
         res.json(workouts);
-        // res.get(workouts);
     } catch (err) {
         res.status(500).statusMessage(err).end();
     }
@@ -20,9 +20,14 @@ router.get("/", async (req, res) => {
 
 // });
 
-// router.post("", async () => {
-
-// });
+router.post("/workouts", async () => {
+    try {
+        const workouts = await db.Workout.create({});
+        res.json(workouts);
+    } catch (err) {
+        res.status(500).statusMessage(err).end();
+    }
+});
 
 // router.put("", async () => {
 
