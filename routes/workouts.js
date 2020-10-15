@@ -1,86 +1,68 @@
-// projects 2 router  review it
-
 const express = require("express");
 
 const db = require("../models");
 
-//require in index.js router
 const router = express.Router();
 
+//week 17 activity 14 ins populate
 router.get("/workouts", async (req, res) => {
-    try {
-        const workouts = await db.Workout.find({});
-        res.json(workouts);
-    } catch (err) {
-        res.status(500).statusMessage(err).end();
-    }
+    db.Workout.find({})
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+            console.log(err);
+        })
 });
 
-// router.get("", async () => {
-
-// });
-
-router.post("/workouts", async () => {
-    try {
-        const workouts = await db.Workout.create({});
-        res.json(workouts);
-    } catch (err) {
-        res.status(500).statusMessage(err).end();
-    }
+router.post("/workouts", async (req, res) => {
+    db.Workout.create({})
+        .populate("exercises")
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+            console.log(err);
+        })
 });
 
-// router.put("", async () => {
+router.get("/range", async (req, res) => {
+    db.Workout.find({})
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+            console.log(err);
+        });
+});
 
+router.post("/range", async (req, res) => {
+    db.Workout.create({})
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+            console.log(err);
+        });
+});
+
+// router.put("/:id", ({ body, params }, res) => {
+//     db.WorkoutWorkout.findByIdAndUpdate(
+//         params.id,
+//         { $push: { exercises: body } },
+//         { new: true }
+//     )
+//         .then(dbWorkout => {
+//             res.json(dbWorkout);
+//         })
+//         .catch(err => {
+//             res.json(err);
+//         });
 // });
 
-// router.delete("", async () => {
-
-// });
 //export to index.js
 module.exports = router;
-
-// index.js to export models to server?
-// const db = require("./models");
-
-
-// app.get("/notes", (req, res) => {
-//   db.Note.find({})
-//     .then(dbNote => {
-//       res.json(dbNote);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-// app.get("/user", (req, res) => {
-//   db.User.find({})
-//     .then(dbUser => {
-//       res.json(dbUser);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-// app.post("/submit", ({ body }, res) => {
-//   db.Note.create(body)
-//     .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { notes: _id } }, { new: true }))
-//     .then(dbUser => {
-//       res.json(dbUser);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-// app.get("/populateduser", (req, res) => {
-//   db.User.find({})
-//     .populate("notes")
-//     .then(dbUser => {
-//       res.json(dbUser);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
