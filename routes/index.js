@@ -6,7 +6,7 @@ const htmlRoutes = require("./htmlRoutes");
 
 const router = express.Router();
 
-router.use(workoutRoutes);
-router.use(htmlRoutes);
+router.use("/api", workoutRoutes);
+router.use("/", htmlRoutes);
 
 module.exports = router;
