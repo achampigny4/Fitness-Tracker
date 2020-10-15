@@ -1,14 +1,12 @@
 //class wed 10/7 office hours
 const express = require("express");
 
-const workoutRoutes= require("./workouts");
-// const = require("");
+const workoutRoutes = require("./workouts");
+const htmlRoutes = require("./htmlRoutes");
 
 const router = express.Router();
 
-//ex todos.js route
-router.use("/workouts", workoutRoutes);
-//ex posts.js route
-// router.use("/", );'
+router.use(workoutRoutes);
+router.use(htmlRoutes);
 
 module.exports = router;
