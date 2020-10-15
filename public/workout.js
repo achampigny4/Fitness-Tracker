@@ -15,9 +15,9 @@ async function initWorkout() {
 
     renderWorkoutSummary(workoutSummary);
   } else {
-    renderNoWorkoutText()
-  }
-}
+    renderNoWorkoutText();
+  };
+};
 
 function tallyExercises(exercises) {
   const tallied = exercises.reduce((acc, curr) => {
@@ -28,7 +28,8 @@ function tallyExercises(exercises) {
     } else if (curr.type === "cardio") {
       acc.totalDistance = (acc.totalDistance || 0) + curr.distance;
     }
-    return acc.totalDuration = (acc.totalDuration || 0) + curr.duration;
+    acc.totalDuration = (acc.totalDuration || 0) + curr.duration;
+    return acc;
   }, {});
   return tallied;
 }
@@ -69,16 +70,16 @@ function renderWorkoutSummary(summary) {
 
     container.appendChild(p);
   });
-}
+};
 
 function renderNoWorkoutText() {
   const container = document.querySelector(".workout-stats");
   const p = document.createElement("p");
   const strong = document.createElement("strong");
-  strong.textContent = "You have not created a workout yet!"
+  strong.textContent = "You have not created a workout yet!";
 
   p.appendChild(strong);
   container.appendChild(p);
-}
+};
 
 initWorkout();
